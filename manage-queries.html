@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RentNGo Admin | Customer Support</title>
+	<script src="js/jquery-3.2.1.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-auth.js"></script>
+	<script>
+        $(document).ready(function() {
+            $("#head").load("includes/header.html");
+            $("#nav_admin").load("includes/lhs-admin.html");
+        });
+    </script>
+</head>
+<body onload="queries.Read()">
+	<script src="js/connection.js"></script>
+	<script src="js/logout.js"></script>
+    <script src="js/queries.js"></script>
+	<script src="js/apiService.js"></script>
+</body>
+</html>

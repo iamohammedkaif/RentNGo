@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RentNGo | View Your Profile</title>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="css/dashboard.css">
+    
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-storage.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#head").load("includes/header.html");
+            $("#nav_user").load("includes/lhs-user.html");
+            $("#foot").load("includes/footer.html");
+            $("#tbl-rider").hide();
+            $("#tbl-driver").hide();
+        });
+        function check(){
+            var who;
+            who=user.Check();
+            if(who==1){
+                $("#tbl-rider").show();
+                $("#tbl-driver").hide();
+            }   
+            else if(who==0){
+                $("#tbl-rider").hide();
+                $("#tbl-driver").show();
+            }
+        }
+    </script>
+</head>
+<body onmouseover="admin.getPhone(); check()">
+    <header id="head"></header>
+    <div class="form-row justify-content-between">
+        <div class="col-sm-3">
+        <nav id="nav_user"></nav>
+        </div>
+        <div class="col-sm-8 mt-5">
+        <!-- Rider Details Display -->
+        <table border="2" id="tbl-rider" align="center" onmouseover="user.Read()">
+        <th colspan="2"><h3>Rider Details</h3></th>
+        <tr align="center">
+            <td><b>Profile Pic</b></td>
+            <td><h4>Loading...</h4></td>
+		</tr>
+        <tr align="center">
+            <td><b>Full Name</b></td>
+            <td><p id="r_name"></p></td>
+        </tr>
+        <tr align="center">
+            <td><b>Rating</b></td>
+            <td><p id="r_rating"></p></td>
+		</tr>
+        <tr align="center">
+            <td><b>e-Mail Id</b></td>
+            <td><p id="r_email"></p></td>
+        </tr>
+        <tr align="center">
+            <td><b>Amount Due</b></td>
+            <td><p id="r_amountDue"></p></td>
+        </tr>
+        <tr align="center">
+            <td><b>Total No. of Trips</b></td>
+            <td><p id="r_trips"></p></td>
+		</tr>
+		<tr align="center">
+            <td><b>Contact no</b></td>
+            <td><p id="r_contactNo"></p></td>
+		</tr>
+        <tr align="center">
+            <td><b>Date of Birth</b></td>
+            <td><p id="r_dateOfBirth"></p></td>
+		</tr>
+        <tr align="center">
+            <td><b>Address</b></td>
+            <td><p id="r_address"></p></td>
+		</tr>
+        <tr align="center">
+            <td><b>City</b></td>
+            <td><p id="r_city"></p></td>
+        </tr>
+        <tr align="center">
+            <td colspan="2">
+                <button onclick="window.location.replace('update-rider-profile.html')">Update</button>
+            </td>
+        </tr>
+        </table>
+        <!-- Driver Details -->
+        <table border="2" id="tbl-driver" align="center" onmouseover="user.Read()">
+        <th colspan="2"><h3>Driver Details</h3></th>
+        <tr align="center"> 
+            <td><b>Profile Pic</b></td>
+            <td><h4>Loading...</h4></td>
+        </tr>
+        <tr align="center">
+            <td><b>Full Name</b></td>
+            <td><p id="d_name"></p></td>
+        </tr>
+        <tr align="center">
+            <td><b>e-Mail Id</b></td>
+            <td><p id="d_email"></p></td>
+        </tr>
+        <tr align="center">
+            <td><b>Rating</b></td>
+            <td><p id="d_rating"></p></td>
+        </tr>
+        <tr align="center">
+            <td><b>Amount Due</b></td>
+            <td><p id="d_amountDue"></p></td>
+        </tr>
+        <tr align="center">
+            <td><b>Total No. of Trips</b></td>
+            <td><p id="d_trips"></p></td>
+		</tr>
+        <tr align="center">
+            <td><b>Contact no</b></td>
+            <td><p id="d_contactNo"></p></td>
+        </tr>
+        <tr align="center">
+            <td><b>Date of Birth</b></td>
+            <td><p id="d_dateOfBirth"></p></td>
+        </tr>
+        <tr align="center">
+            <td><b>Address</b></td>
+            <td><p id="d_address"></p></td>
+        </tr>
+        <tr align="center">
+            <td><b>City</b></td>
+            <td><p id="d_city"></p></td>
+        </tr>
+        <tr align="center">
+            <td><b>Vehicle and Type</b></td>
+            <td><p id="d_vehicleType"></p></td>
+        </tr>
+        <tr align="center">
+            <td><b>Vehicle Registration Number</b></td>
+            <td><p id="d_vehicleNo"></p></td>
+        </tr>
+        <tr align="center">
+            <td><b>DL Number</b></td>
+            <td><p id="d_dlNo"></p></td>
+        </tr>
+        <tr align="center">
+            <td><b>PAN Number</b></td>
+            <td><p id="d_panNo"></p></td>
+        </tr>
+        <tr align="center" colspan="2">
+            <td colspan="2">
+                <button onclick="window.location.replace('update-driver-profile.html')">Update</button>
+            </td>
+        </tr>
+        </table>
+        </div>
+    </div>
+ 
+    <footer id="foot"></footer>   
+    <script src="js/connection.js"></script>
+	<script src="js/logout.js"></script>
+	<script src="js/user.js"></script>
+	<script src="js/apiService.js"></script>
+	<script src="js/uploader.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

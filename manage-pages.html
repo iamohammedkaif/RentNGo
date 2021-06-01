@@ -1,0 +1,95 @@
+<?php
+	session_start();
+	error_reporting(0);
+	include('includes/connecion.php');
+	if(strlen($_SESSION['login'])==0)
+	{	
+		header('location:index.php');
+	}
+	else
+	{
+		$connection = mysqli_connect("localhost", "root","","rental");
+		if(isset($_POST['submit']))
+		{
+			$pagetype=$_GET['type'];
+			$pagedetails=$_POST['pgedtls'];
+			$sql = "UPDATE pages SET content ='$pagedetails' WHERE type='$pagetype'";
+			if($result=mysqli_query($connection,$sql))
+				echo "<script>alert('Page Content Updated Successfully..!!');</script>";
+			else
+				echo "<script>alert('Page Content not Updated!!');</script>";
+		}
+?>
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<script type="text/javascript">
+			function url(targ,selObj,restore)
+			{
+				eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+				if (restore) 
+					selObj.selectedIndex=0;
+			}
+		</script>
+		<title>Rental || Pages</title>
+	</head>
+	<body>
+		<?php
+			include('includes/header.php');
+	 		include('includes/lhs.php');
+		?>
+		<h2>Manage Pages</h2>
+		<form method="post">
+			<label>Select Page</label>
+			<select name="menu" onChange="url('parent',this,0);">
+				<option value="">***Select One***</option>
+				<option value="pages.php?type=terms">Terms and Condition</option>
+                <option value="pages.php?type=privacy">Privacy Policy</option>
+                <option value="pages.php?type=aboutus">About Us</option> 
+                <option value="pages.php?type=faqs">FAQs</option>
+            </select>
+            <br/>
+            <label">Selected Page</label>
+			<?php
+				switch($_GET['type'])
+				{
+					case "terms" :
+						echo "Terms and Conditions";
+						break;
+				
+					case "privacy" :
+						echo "Privacy Policy";
+						break;
+				
+					case "aboutus" :
+						echo "About Us";
+						break;
+
+					case "faqs" :
+						echo "FAQs";
+						break;
+											
+					default :
+						echo "";
+						break;	
+				}
+			?>
+			<br/>
+			<label>Page Details</label>									
+			<textarea rows="5" cols="50" name="pgedtls" id="pgedtls" required>
+				<?php
+					$pagetype=$_GET['type'];
+					$sql = "SELECT * from pages where type='$pagetype'";
+					$result=mysqli_query($connection,$sql);
+					echo "\n";
+					while($row=mysqli_fetch_assoc($result))
+					{
+						echo $row['content'];
+					}
+				?>
+			</textarea>
+			<br/>
+			<button type="submit" name="submit" value="Update" id="submit">Update</button>
+		</form>					
+	</body>
+	</html>

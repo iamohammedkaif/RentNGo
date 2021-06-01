@@ -1,0 +1,40 @@
+
+.card-body{
+	border:solid 10px ;
+	border-color: #869e91;
+	margin-left: 20%;
+	margin-right: 20%;
+	margin-top: 5%;
+
+}
+h3{
+	margin-left: 20px;
+	color: #3498db;
+	text-transform: uppercase;
+	letter-spacing: 0.2rem;
+}
+h2{
+	margin-left: 20px;
+	font-family:'Montserrat', sans-serif;
+	font:bold;
+
+
+}
+p{
+	margin-left: 20px;
+	padding: 10px;
+	margin-right: 20px;
+	font-family: 'Chilanka', cursive;
+	font-weight: 800;
+
+}
+#one{
+	border-left: solid 5px ;
+	border-left-color: #bdc3c7;
+	margin-left: 20px;
+
+}
+.card-footer{
+	text-align: center;
+
+}

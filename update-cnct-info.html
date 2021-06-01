@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RentNGo Admin | Update Contact Info</title>
+	<link rel="shortcut icon" href="#">
+	<script src="js/jquery-3.2.1.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-auth.js"></script>
+	<script>
+        $(document).ready(function() {
+            $("#head").load("includes/header.html");
+            $("#nav_admin").load("includes/lhs-admin.html");
+        });
+    </script>
+</head>
+<body onload="admin.ContactDetails(1)">
+	<header id="head"></header>
+    <nav id="nav_admin"></nav>
+	<h2>Update Contact Info</h2>
+	<form id="update" onsubmit="admin.Update()">
+		<table>
+			<tr>
+				<td>Email ID</td>
+				<td><input type="email" id="email"></td>
+			</tr>
+			<tr>
+				<td>Mobile</td>
+				<td><input type="number" id="mobile"></td>
+			</tr>
+			<tr>
+				<td>Address</td>
+				<td><textarea rows="3" cols="25" name="address" id="address"></textarea></td>
+			</tr>
+			<tr>
+				<td><button type="reset">Reset</button></td>
+				<td><button type="submit">Update</button></td>
+			</tr>
+		</table>
+	</form>
+
+	<script src="js/connection.js"></script>
+	<script src="js/logout.js"></script>
+	<script src="js/admin.js"></script>
+    <script src="js/apiService.js"></script>
+</body>
+</html>
+	

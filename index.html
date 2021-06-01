@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent N Go</title>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-auth.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <script src="https://kit.fontawesome.com/6d716edc46.js" crossorigin="anonymous"></script>
+
+</head>
+<body onload="admin.ContactDetails()">
+    <nav id="mainNavbar" class=" navbar navbar-expand-md fixed-top py-0" >
+        <img class="navbar-brand  " src="images/logo.png"alt="">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span ><i class="fas fa-ellipsis-v"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul  class="navbar-nav mr-auto">
+    
+            <li class="nav-item ">
+                <a class="nav-link active" href="index.html"><i class="fas fa-home mr-1"></i>HOME<span class="sr-only">(current)</span></a>
+            </li>
+    
+            <li class="nav-item">
+                <a class="nav-link " href="career.html" tabindex="-1" aria-disabled="true"><i class="fas fa-user-tie mr-1"></i>CAREERS</a>
+            </li>
+    
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="tue">
+                    <i class="fas fa-building mr-1"></i>Company
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="blog.html">Blog</a>
+                <a class="dropdown-item" href="gallery.html">Gallery</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="about.html">About</a>
+                </div>
+            </li>
+    
+            <li class="nav-item">
+                <a class="nav-link" href="qna.html"><i class="fas fa-question-circle mr-1"></i>Help</a>
+            </li>
+    
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="contact.html"><i class="fas fa-id-card-alt mr-1"></i>Contact Us</a>
+            </li> -->
+       </ul>
+        <button class="  my-2 my-lg-0 btn btn-outline-light btn-sm" onclick="login.go()"><i class="fas fa-sign-in-alt mr-2"></i>Login</button>
+    </div>
+    </nav>
+        <!-- jumbotron -->
+        <section id="jumb" class="jumbotron text-center">
+            <div class="display-3">Welcome to Rent N Go</div>
+            <p class="lead">We have introduced Rent N Go with the aim of serving our clients with best and reliable cab services with the help of Rent N Go application assisting in India. We apply strategic thinking, dedicated support, complete efforts, and practical approach.</p>
+            <a href="" class="btn btn-primary">Download the android app to rent vehicles</a>
+        </section>
+        <section class="loginform">
+        <div id="firebaseui-container"></div>
+        <div id="loader"></div>
+        </section>
+  
+    <div class="text-light " style="background-color: #563D7C">
+    <div class="container d-flex justify-content-between">
+    <div>
+        <h4>Contact Us at:</h4>
+                <label> Email ID</label><p id="email"></p>
+                <label> Mobile </label><p id="mobile"></p>
+                <label> Address</label><p id="address"></p>
+    </div>
+    <div>
+        <div class="display-5 mr-2">follow us on <i class="fab fa-instagram mr-1"></i><i class="fab fa-facebook mr-1"></i><i class="fab fa-twitter mr-1"></i></div>
+        
+    </div>
+    </div>
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="js/connection.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/apiService.js"></script>
+    <script src="js/index.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RentNGo | Update Your Profile</title>
+    <link rel="shortcut icon" href="#">
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-storage.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#head").load("includes/header.html");
+            $("#nav_user").load("includes/lhs-user.html");
+            $("#foot").load("includes/footer.html");
+        });
+    </script>
+</head>
+<body onmouseover="admin.getPhone()">
+    <header id="head"></header>
+    <nav id="nav_user"></nav>
+    <!-- Rider Details Update -->
+     <table border="2" id="tbl-rider-update" align="center" onclick="user.Read(1)">
+        <th colspan="2"><h3> Update Your Details</h3></th>
+        <tr align="center">
+            <td><b>Update Profile Pic</b></td>
+            <td>
+                <input type="file" value="upload" id="rider-pro-pic" onmouseover="uploader.Rider()"/>
+                <br/>
+                <progress value="0" id="rider-profile-uploader" max="100">0%</progress>
+            </td>
+        </tr>
+        <tr align="center">
+            <td><b>Full Name</b></td>
+            <td><input id="r_name" type="text"/></td>
+        </tr>
+		<tr align="center">
+            <td><b>Contact no</b></td>
+            <td><input id="r_contactNo" type="number"/></td>
+		</tr>
+        <tr align="center">
+            <td><b>Date of Birth</b></td>
+            <td><input id="r_dateOfBirth" type="date"/></td>
+		</tr>
+        <tr align="center">
+            <td><b>Address</b></td>
+            <td><textarea id="r_address"></textarea></td>
+        </tr>
+        <tr align="center">
+            <td colspan="2">
+                <button id="update" type="submit" onclick="user.RiderUpdate()">Update</button>
+            </td>   
+        </tr>
+	</table>
+                
+    <footer id="foot"></footer>   
+    <script src="js/connection.js"></script>
+	<script src="js/logout.js"></script>
+	<script src="js/user.js"></script>
+    <script src="js/crud-rider.js"></script>
+    <!-- <script src="js/crud-driver.js"></script> -->
+	<script src="js/apiService.js"></script>
+	<script src="js/uploader.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

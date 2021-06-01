@@ -1,0 +1,66 @@
+{
+    "rules": {
+        "usergroups":{
+            ".read": "auth.uid === '8l9y7Ll5Oph0IbaEnLaXQ4ixGWm1'",
+            ".write": "auth.uid === '8l9y7Ll5Oph0IbaEnLaXQ4ixGWm1'",
+            "permitted":{
+                "$uid": {".validate":true}
+            }
+        },
+      "contactus":{}
+     }
+}
+
+{
+    "users":{
+        "$uid":{
+            "read":"auth!=null && auth.uid==$uid",
+            "write":"auth!=null && auth.uid==$uid",
+            "name":{".validate":"newData.isString()"},
+            "age":{".validate":"newData.isNumber()"},
+            "message":{".validate":"newData.isString()"},
+            "properties":"values"
+        }
+    }
+}
+
+{"rules": {
+    ".read":true,
+      ".write":true,
+}
+}
+
+{"rules": {
+    "contactus":{
+      "$uid":{
+        ".read":true,
+          ".write":"auth!=null && auth.uid==='jnPyqmTUvCNL5ga1KqpDOIyYbJj2'"
+      }
+    },
+      "queries":{
+      "$uid":{
+        ".read":true,
+          ".write":false
+      }
+    },
+    "users":{
+      "riders":{
+        "$uid":{
+          ".read":"auth!=null && (auth.uid==$uid || auth.uid==='jnPyqmTUvCNL5ga1KqpDOIyYbJj2')",
+          ".write":"auth!=null && auth.uid==$uid",
+          "name":{".validate":"newData.isString()"}
+        }
+      },
+      "drivers":{
+        "$uid":{
+          ".read":"auth!=null && (auth.uid==$uid || auth.uid==='jnPyqmTUvCNL5ga1KqpDOIyYbJj2')",
+          ".write":"auth!=null && auth.uid==$uid",
+          "name":{".validate":"newData.isString()"}
+        }
+      }
+    }
+      
+   }
+  }
+  
+  

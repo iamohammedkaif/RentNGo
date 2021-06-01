@@ -1,0 +1,29 @@
+body{
+    background-color: rgb(167, 245, 131);
+}
+#jumb{
+    background-image: url("https://images.unsplash.com/photo-1588421358255-15197479b11a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");
+    background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+}
+.navbar-brand{
+    height: 5%;
+    width: 5%;
+}
+#mainNavbar{
+    font-size: 1.5rem;
+    font-weight: 100;
+}
+#mainNavbar .nav-link{
+    color: black;
+}
+#mainNavbar .nav-link:hover{
+    color: white;
+}
+.navbar.scrolled{
+    
+    background-color: #563D7C;
+    transition-delay: 0.5s;
+    
+}

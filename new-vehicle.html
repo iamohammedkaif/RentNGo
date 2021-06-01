@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RentNGo | Vehicle Details</title>
+    <link rel="shortcut icon" href="#">
+    <script src="js/jquery-3.2.1.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-storage.js"></script>
+    <script>
+        $(document).ready(function() {
+            
+            $("#car_type").hide();
+            $("#bike_type").hide();
+            $("#cycle_type").hide();
+            $("#bus_type").hide();
+            $("#truck_type").hide();
+            $("#vehicle_images").hide();
+        });
+        function checkType(){
+            if(document.getElementById('car').checked){
+                $("#car_type").show();
+                $("#bike_type").hide();
+                $("#cycle_type").hide();
+                $("#bus_type").hide();
+                $("#truck_type").hide();
+                document.getElementById('wheels').value=4;
+                $("#standard").prop('required',false);
+                $("#regular").prop('required',false);
+                $("#coach").prop('required',false);
+                $("#minitruck").prop('required',false);
+            }
+            else if(document.getElementById('bike').checked){
+                $("#bike_type").show();
+                $("#car_type").hide();
+                $("#cycle_type").hide();
+                $("#bus_type").hide();
+                $("#truck_type").hide();
+                document.getElementById('wheels').value=2;
+                document.getElementById('seats').value=2;
+                $("#compact").prop('required',false);
+                $("#regular").prop('required',false);
+                $("#coach").prop('required',false);
+                $("#minitruck").prop('required',false);
+            }
+            else if(document.getElementById('cycle').checked){
+                $("#cycle_type").show();
+                $("#car_type").hide();
+                $("#bike_type").hide();
+                $("#bus_type").hide();
+                $("#truck_type").hide();
+                document.getElementById('wheels').value=2;
+                document.getElementById('seats').value=1;
+                $("#compact").prop('required',false);
+                $("#standard").prop('required',false);
+                $("#coach").prop('required',false);
+                $("#minitruck").prop('required',false);
+            }
+            else if(document.getElementById('bus').checked){
+                $("#bus_type").show();
+                $("#car_type").hide();
+                $("#bike_type").hide();
+                $("#cycle_type").hide();
+                $("#truck_type").hide();
+                $("#compact").prop('required',false);
+                $("#standard").prop('required',false);
+                $("#regular").prop('required',false);
+                $("#minitruck").prop('required',false);
+            }
+            else if(document.getElementById('truck').checked){
+                $("#truck_type").show();
+                $("#car_type").hide();
+                $("#bike_type").hide();
+                $("#cycle_type").hide();
+                $("#bus_type").hide();
+                $("#compact").prop('required',false);
+                $("#standard").prop('required',false);
+                $("#regular").prop('required',false);
+                $("#coach").prop('required',false);
+            }
+        }
+        function sendData(type,subtype,company,model,wheels,seats,facilities,fuel){
+            vehicle.Create(type,subtype,company,model,wheels,seats,facilities,fuel);
+            $("#vehicle_details").hide();
+            $("#vehicle_images").show();
+        }
+    </script>
+</head>
+<body class="m-0 p-0 bg-info" onmouseover="crud_driver.getVehicleNo()">
+    <h2 class="display-4 justify-content-center text-center " >Vehicle Details</h2>
+    <form  id="vehicle_details">
+    <div class="form-row justify-content-around">
+        <div class="col-sm-4" id="type">
+            Please select your Vehicle Type: <br>
+            <input type="radio" id="car" name="type" value="car" onclick="checkType()" required>
+            <label for="car">Car</label>
+            <input type="radio" id="bike" name="type" value="bike" onclick="checkType()">
+            <label for="bike">Bike</label>
+            <input type="radio" id="cycle" name="type" value="cycle" onclick="checkType()">
+            <label for="cycle">Bi-Cycle</label>
+            <input type="radio" id="bus" name="type" value="bus" onclick="checkType()">
+            <label for="bus">Bus</label>
+            <input type="radio" id="truck" name="type" value="truck" onclick="checkType()">
+            <label for="truck">Truck</label>
+            <br><br>
+        </div>
+        <div class="col-sm-4" id="car_type">
+            Select the Type of your Car:<br>
+            <input type="radio" id="compact" name="car_type" value="compact" required>
+            <label for="compact">Compact</label>
+            <input type="radio" id="sedan" name="car_type" value="sedan">
+            <label for="sedan">Sedan</label>
+            <input type="radio" id="hatchback" name="car_type" value="hatchback">
+            <label for="hatchback">Hatchback</label>
+            <input type="radio" id="van" name="car_type" value="van">
+            <label for="van">Van</label>
+            <input type="radio" id="suv" name="car_type" value="suv">
+            <label for="suv">SUV</label>
+            <input type="radio" id="convertible" name="car_type" value="convertible">
+            <label for="convertible">Convertible</label>
+            <input type="radio" id="limo" name="car_type" value="limo">
+            <label for="limo">Limo</label>
+            <input type="radio" id="sports" name="car_type" value="sports">
+            <label for="sports">Sports</label>
+            <br><br>
+        </div>
+        
+        <div class="col-sm-4" id="bike_type">
+            Select the Type of your Bike:<br>
+            <input type="radio" id="standard" name="bike_type" value="standard" required>
+            <label for="standard">Standard</label>
+            <input type="radio" id="cruiser" name="bike_type" value="cruiser">
+            <label for="cruiser">Cruiser</label>
+            <input type="radio" id="touring" name="bike_type" value="touring">
+            <label for="touring">Touring</label>
+            <input type="radio" id="dualpurpose" name="bike_type" value="dualpurpose">
+            <label for="dualpurpose">Dual Purpose</label>
+            <input type="radio" id="sport" name="bike_type" value="sport">
+            <label for="sport">Sport</label>
+            <input type="radio" id="dirtbike" name="bike_type" value="dirtbike">
+            <label for="dirtbike">Dirt Bike</label>
+            <br><br>
+        </div>
+    
+        <div class="col-sm-4" id="cycle_type">
+            Select the Type of your Cycle:<br>
+            <input type="radio" id="regular" name="cycle_type" value="regular" required>
+            <label for="regular">Regular</label>
+            <input type="radio" id="gear" name="cycle_type" value="gear">
+            <label for="gear">Gear</label>
+            <br><br>
+        </div>
+        <div class="col-sm-4" id="bus_type">
+            Select the Type of your Bus:<br>
+            <input type="radio" id="coach" name="bus_type" value="coach" required>
+            <label for="coach">Coach</label>
+            <input type="radio" id="school" name="bus_type" value="school">
+            <label for="school">School</label>
+            <input type="radio" id="shuttle" name="bus_type" value="shuttle">
+            <label for="shuttle">Shuttle</label>
+            <input type="radio" id="minibus" name="bus_type" value="minibus">
+            <label for="minibus">Mini-Bus/Traveller</label>
+            <input type="radio" id="minicoach" name="bus_type" value="minicoach">
+            <label for="minicoach">Mini-Coach</label>
+            <input type="radio" id="doubledecker" name="bus_type" value="doubledecker">
+            <label for="doubledecker">Double-Decker</label>
+            <input type="radio" id="nightliner" name="bus_type" value="nightliner">
+            <label for="nightliner">Nightliner</label>
+            <br><br>
+        </div>
+        <div class="col-sm-4" id="truck_type">
+            Select the Type of your Truck:<br>
+            <input type="radio" id="minitruck" name="truck_type" value="minitruck" required>
+            <label for="minitruck">Mini-Truck</label>
+            <input type="radio" id="box" name="truck_type" value="box">
+            <label for="box">Box Truck</label>
+            <input type="radio" id="open" name="truck_type" value="open">
+            <label for="open">Open Truck</label>
+            <input type="radio" id="tractor" name="truck_type" value="tractor">
+            <label for="tractor">Tractor Unit</label>
+            <input type="radio" id="cementmixer" name="truck_type" value="cementmixer">
+            <label for="cementmixer">Cement Mixer</label>
+            <input type="radio" id="tank" name="truck_type" value="tank">
+            <label for="tank">Tank Truck</label>
+            <input type="radio" id="dump" name="truck_type" value="dump">
+            <label for="dump">Dump Truck</label>
+            <input type="radio" id="jcb" name="truck_type" value="jcb">
+            <label for="jcb">JCB</label>
+            <input type="radio" id="carcarrier" name="truck_type" value="carcarrier">
+            <label for="carcarrier">Car-Carrier Truck</label>
+            <br><br>
+        </div> 
+    </div>      
+    <div class="form-row justify-content-around mb-4">
+        <div class="col-sm-4">
+            Company:<input type="text" name="company" id="company" required>
+        </div>
+        <div class="col-sm-4">
+             Model:<input type="text" name="model" id="model" required>
+        </div>
+    </div>
+    <div class="form-row justify-content-around mb-4">
+        <div class="col-sm-4">
+            Wheels:<input type="number" name="wheels" id="wheels" required>
+        </div>
+        <div class="col-sm-4">
+            Seats:<input type="number" name="seats" id="seats" required>
+        </div>
+    </div>
+        <div class="mx-auto" style="width: 600px;" id="facilities">
+            Please select the Facilities that are applicable to your vehicle: <br>
+            <input class="facilities" type="checkbox" id="airbags" name="airbags" value="airbags">
+            <label for="airbags">Air Bags</label>
+            <input class="facilities" type="checkbox" id="ac" name="ac" value="ac">
+            <label for="ac">Air Conditioning</label>
+            <input class="facilities" type="checkbox" id="aux" name="aux" value="aux">
+            <label for="aux">AUX Cable</label>
+            <input class="facilities" type="checkbox" id="tv" name="tv" value="tv">
+            <label for="tv">Television</label>
+            <input class="facilities" type="checkbox" id="sunroof" name="sunroof" value="sunroof">
+            <label for="sunroof">Sun Roof</label>
+            <br>
+            <input class="facilities" type="checkbox" id="sparetyre" name="sparetyre" value="sparetyre">
+            <label for="sparetyre">Spare Tyre</label>
+            <input class="facilities" type="checkbox" id="jack" name="jack" value="jack">
+            <label for="jack">Jack</label>
+            <input class="facilities" type="checkbox" id="firstaid" name="firstaid" value="firstaid">
+            <label for="firstaid">First-aid Kit</label>
+            <input class="facilities" type="checkbox" id="carrier" name="carrier" value="carrier">
+            <label for="carrier">Carrier</label>
+            <input class="facilities" type="checkbox" id="emergency" name="emergency" value="emergency">
+            <label for="emergency">Emergency Exit</label>
+            <br><br>
+        </div>
+        <div class="mx-auto" style="width: 600px;" id="fuel">
+            Please select the Fuel type: <br>
+            <input type="radio" id="petrol" name="fuel" value="petrol" required>
+            <label for="petrol">Petrol</label>
+            <input type="radio" id="diesel" name="fuel" value="diesel">
+            <label for="diesel">Diesel</label>
+            <input type="radio" id="cng" name="fuel" value="cng">
+            <label for="cng">CNG</label>
+            <input type="radio" id="electric" name="fuel" value="electric">
+            <label for="electric">Electric</label>
+            <input type="radio" id="hybrid" name="fuel" value="hybrid">
+            <label for="hybrid">Hybrid</label>
+            <input type="radio" id="nofuel" name="fuel" value="nofuel">
+            <label for="nofuel">No Fuel Required</label>
+            <br><br>
+        </div>
+        <div class="mx-auto" style="width: 100px;" >
+        <button class="btn-success mx-auto" style="width: 100px;" type="submit" value="Go">GO</button>
+        </div>
+    </form>
+    <form id="vehicle_images">
+        <h3>Please try to upload images from different views</h3>
+        <table>
+            <tr align="center">
+                <td><b>Upload Image 1</b></td>
+                <td>
+                    <input type="file" value="upload" id="image1" onmouseover="vehicle.InvokeUploader()"/>
+                    <br/>
+                    <progress value="0" id="image1-uploader" max="100">0%</progress>
+                </td>
+            </tr>
+            <tr align="center">
+                <td><b>Upload Image 2</b></td>
+                <td>
+                    <input type="file" value="upload" id="image2" onmouseover="vehicle.InvokeUploader()"/>
+                    <br/>
+                    <progress value="0" id="image2-uploader" max="100">0%</progress>
+                </td>
+            </tr>
+            <tr align="center">
+                <td><b>Upload Image 3</b></td>
+                <td>
+                    <input type="file" value="upload" id="image3" onmouseover="vehicle.InvokeUploader()"/>
+                    <br/>
+                    <progress value="0" id="image3-uploader" max="100">0%</progress>
+                </td>
+            </tr>
+            <tr align="center">
+                <td><b>Upload Image 4</b></td>
+                <td>
+                    <input type="file" value="upload" id="image4" onmouseover="vehicle.InvokeUploader()"/>
+                    <br/>
+                    <progress value="0" id="image4-uploader" max="100">0%</progress>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div>
+        <h5>Want to come back later with your details?
+        <button class="btn-danger border border-dark" onclick="mainApp.logOut()">Logout</button>
+    </div>
+    <script type="text/javascript">
+        document.getElementById('vehicle_details').addEventListener('submit',submitData);
+        function submitData(e){
+            e.preventDefault();
+            var types,subtypes,fuels,all_facilities;
+            var company,model,wheels,seats;
+            var type,subtype,facilities={},fuel;
+            types=document.getElementsByName('type');
+            for(var i=0;i<types.length;i++){
+                if(types[i].checked){
+                    type=types[i].value;
+                }
+            }
+            subtypes=document.getElementsByName(type+'_type');
+            for(var i=0;i<subtypes.length;i++){
+                if(subtypes[i].checked){
+                    subtype=subtypes[i].value;
+                }
+            }
+            company=document.getElementById('company').value;
+            model=document.getElementById('model').value;
+            wheels=document.getElementById('wheels').value;
+            seats=document.getElementById('seats').value;
+            all_facilities=document.getElementsByClassName('facilities');
+            for(var i=0,j=1;i<all_facilities.length;i++){
+                if(all_facilities[i].checked){
+                    facilities[j++]=all_facilities[i].value;
+                }
+            }
+            fuels=document.getElementsByName('fuel');
+            for(var i=0;i<fuels.length;i++){
+                if(fuels[i].checked){
+                    fuel=fuels[i].value;
+                }
+            }
+            sendData(type,subtype,company,model,wheels,seats,facilities,fuel);
+        }
+    </script>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <script src="js/connection.js"></script>
+    <script src="js/logout.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/vehicle.js"></script>
+    <script src="js/crud-driver.js"></script>
+    <script src="js/uploader.js"></script>
+    <script src="js/apiService.js"></script>
+</body>
+</html>

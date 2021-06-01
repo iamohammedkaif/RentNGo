@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RentNGo | New-User</title>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-storage.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#tbl-rider').hide();
+            $('#tbl-driver').hide();
+            $("#rider").click(function(){
+                $("#tbl-rider").show();
+                $("#tbl-driver").hide();
+                crud_rider.Rider();
+            });
+            $("#driver").click(function(){
+                $("#tbl-rider").hide();
+                $("#tbl-driver").show();
+                crud_driver.Driver();
+            });
+            $("#rider-submit").click(function(){
+                $("#tbl-rider").hide();
+                crud_rider.CreateRider();
+            });
+            $("#driver-submit").click(function(){
+                crud_driver.CreateDriver();
+                $("#tbl-driver").hide();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="bg-dark">
+    <h3 class="text-warning">**You are a new user, please enter the following details to continue**</h3>
+    <nav class="nav nav-pills justify-content-around">
+        <button class=" btn-outline-primary nav-item nav-link" id="rider" href="#">Sign up to Ride</button>
+        <button  class="btn-outline-primary nav-item nav-link" id="driver" href="#">Sign up to Drive</button>
+        <button class="btn-outline-danger" onclick="mainApp.logOut()" class="nav-item nav-link" href="#">Logout</button>
+    </nav>
+</div>
+    <!-- Rider Details -->
+    <div id="tbl-rider" style="background-color: #C1ECF3;" >
+    <div  class="form-row justify-content-around ">
+        <div class="col-sm-5   border-dark">
+            <div class="heading  display-4 border-bottom border-dark">New Rider Details</div>
+            <b>Upload Profile Pic</b><br>
+            <div  class="fileUpload btn btn-light">
+            <input id="rider-pro-pic" onmouseover="uploader.Rider()" type="file" accept=".jpg,.png,.jpeg" class="upload" />
+            </div>
+            <progress value="0" id="rider-profile-uploader" max="100">0%</progress>
+        </div>
+        <div class="col-sm-5 mt-5 border-top border-dark">
+            <b>User Id</b>
+            <div id="r_uid"></div>
+        </div>
+    </div>
+    <div class="form-row justify-content-around mt-3">
+        <div class="col-sm-5 border-top border-top border-dark">
+            <b>Full Name</b>
+            <p id="r_name"></p>
+        </div>
+        <div class="col-sm-5 border-top border-dark">
+            <b>EMail Id</b>
+            <p id="r_email"></p>
+        </div>
+    </div>
+    <div class="form-row justify-content-around mt-3">
+        <div class="col-sm-5 border-top border-top border-dark">
+            <b>Date of Birth</b>
+            <input id="r_dob" type="date" required/>
+        </div>
+        <div class="col-sm-5 border-top border-dark">
+            <b>Contact no</b>
+            <input id="r_mobile" type="number" required/>
+        </div>
+    </div>
+    <div class="form-row justify-content-around mt-3">
+        <div class="col-sm-5 border-top border-dark">
+            <b>Address</b>
+            <textarea id="r_address"></textarea>
+        </div>
+        <div class="col-sm-5 border-top border-dark ">
+            <b>City</b>
+            <input id="r_city" value="Bangalore" required/>
+        </div>
+    </div>
+    <div class="form-row justify-content-around mt-3">
+        <div class="col-sm-5 mb-4 border-top border-dark">
+            <div class="mt-4 border-top">
+                <button id="rider-submit" class="btn btn-primary add mt-4"   type="submit" value="post">Add Rider</button>
+                <button id="overed" class="btn btn-light mt-4 " type="reset">Reset</button>
+            </div>
+        </div>
+        <div class="col-sm-5 border-top border-dark">
+            
+        </div>
+    </div>
+
+</div>
+    <!-- driver Details -->
+
+    <div id="tbl-driver" style="background-color: #C1ECF3;">
+        <div class="form-row justify-content-around ">
+                <div class="col-sm-5">
+                    <div class="heading border-bottom border-dark display-4">New Driver Details</div>
+                    <b>Upload Profile Pic</b><br>
+                    <div  class="fileUpload btn btn-light border border-dark">
+                    <input id="driver-pro-pic" onmouseover="uploader.DriverDP()" type="file" accept=".jpg,.png,.jpeg" class="upload" />
+                    </div>
+                    <progress value="0" id="driver-profile-uploader" max="100">0%</progress>
+                </div>
+                <div class="col-sm-5  border-dark">
+                    <br>
+                    <div class="border-top border-dark">
+                    <b>User Id</b>
+                    <div id="d_uid"></div>
+                </div>
+                </div>
+        </div>
+        <div class="form-row justify-content-around mt-3">
+                    <div class="col-sm-5 border-top border-dark">
+                        <b>Full Name</b>
+                        <p id="d_name"></p>
+                    </div>
+                    <div class="col-sm-5 border-top border-dark">
+                        <b>EMail Id</b>
+                        <p id="d_email"></p>
+                    </div>
+        </div>
+        <div class="form-row justify-content-around mt-3">
+                    <div class="col-sm-5 border-top border-dark">
+                        <b>Date of Birth</b>
+                        <input id="d_dob" type="date" required/>
+                    </div>
+                    <div class="col-sm-5 border-top border-dark">
+                        <b>Contact no</b>
+                        <input id="d_mobile" type="number" required/>
+                    </div>
+        </div>
+        <div class="form-row justify-content-around mt-3">
+                    <div class="col-sm-5 border-top border-dark">
+                        <b>Vehicle and Type</b>
+                        <input id="d_vehicle" type="text" placeholder="eg:Car,Sedan" required/>
+                    </div>
+                    <div class="col-sm-5 border-top border-dark ">
+                        <b>Vehicle Registration Number</b>
+                        <input id="d_vno" type="text" placeholder="eg:KA00A0000" required/>
+                    </div>
+        </div>
+        <div class="form-row justify-content-around mt-3">
+                    <div class="col-sm-5 border-top border-dark">
+                        <b>Enter DL Number</b>
+                        <input id="d_dl" type="text" placeholder="KA0020160000000" required/>
+                    </div>
+                    <div class="col-sm-5 border-top border-dark">
+                        <b>Upload Driving Licence Front</b><br>
+                        <div  class="fileUpload btn btn-light border border-dark">
+                        <input id="driver-dl" onmouseover="uploader.DriverDL()" type="file" accept=".jpg,.png,.jpeg" class="upload" />
+                        </div>
+                        <progress value="0" id="driver-dl-uploader" max="100">0%</progress>
+                    </div>
+        </div>
+        <div class="form-row justify-content-around mt-3">
+                    <div class="col-sm-5 border-top border-dark">
+                        <b>Enter PAN Number</b>
+                        <input id="d_pan" type="text" required/>
+                    </div>
+                    <div class="col-sm-5 border-top border-dark">
+                        <b>Upload Your PAN Card</b><br>
+                        <div  class="fileUpload btn btn-light border border-dark">
+                        <input id="driver-pan" onmouseover="uploader.DriverPAN()" type="file" accept=".jpg,.png,.jpeg" class="upload" />
+                        </div>
+                        <progress value="0" id="driver-pan-uploader" max="100">0%</progress>
+                    </div>
+        </div>
+        <div class="form-row justify-content-around mt-3">
+                    <div class="col-sm-5 border-top border-dark">
+                        <b>Upload Your Motor Insurance Certificate</b><br>
+                        <div  class="fileUpload btn btn-light border border-dark">
+                        <input id="driver-mic" onmouseover="uploader.DriverMIC()" type="file" accept=".jpg,.png,.jpeg" class="upload" />
+                        </div>
+                        <progress value="0" id="driver-mic-uploader" max="100">0%</progress>
+                    </div>
+                    <div class="col-sm-5 border-top border-dark">
+                        <b>Upload Your Registration Certificate</b><br>
+                        <div  class="fileUpload btn btn-light border border-dark">
+                        <input id="driver-rc" onmouseover="uploader.DriverRC()" type="file" accept=".jpg,.png,.jpeg" class="upload" />
+                        </div>
+                        <progress value="0" id="driver-rc-uploader" max="100">0%</progress>
+                    </div>
+        </div>
+        <div class="form-row justify-content-around mt-3 ">
+                    <div class="col-sm-5 border-top border-bottom border-dark">
+                        <b>Upload Your Contract Carriage Permit</b><br>
+                        <div  class="fileUpload btn btn-light border border-dark">
+                        <input id="driver-mic" onmouseover="uploader.DriverCCP()" type="file" accept=".jpg,.png,.jpeg" class="upload" />
+                        </div>
+                        <progress value="0" id="driver-ccp-uploader" max="100">0%</progress>
+                    </div>
+                    <div class="col-sm-5 ">
+                        
+                            <button id="driver-submit" class="btn btn-primary add mt-4 "   type="submit" value="post">Add Driver</button>
+                            <button id="overed" class="btn btn-light mt-4 border border-dark " type="reset">Reset</button>
+                       
+                    </div>
+        </div>
+    </div >
+   
+    <script src="https://kit.fontawesome.com/6d716edc46.js" crossorigin="anonymous"></script>
+    <script src="js/connection.js"></script>
+    <script src="js/logout.js"></script>
+    <script src="js/uploader.js"></script>
+    <script src="js/crud-rider.js"></script>
+    <script src="js/crud-driver.js"></script>
+    <script src="js/apiService.js"></script>
+    <!-- <script src="js/admin.js"></script> -->
+</body>
+</html>

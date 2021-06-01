@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Upload</title>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-storage.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link rel="shortcut icon" href="#">
+</head>
+<body>
+    <progress value="0" id="uploader" max="100">0%</progress>
+    <input type="file" value="upload" id="fileButton"/>
+    <!-- <script>
+        var uploader=document.getElementById('uploader');
+        var fileButton=document.getElementById('fileButton');
+        fileButton.addEventListener('change',function(e){
+            //Get file
+            var file=e.target.files[0];
+            //Create a Storage Ref
+            var storageRef=firebase.storage().ref('images/'+file.name);
+            //Upload File
+            var task=storageRef.put(file);
+            //Update Progress bar
+            task.on('state_changed',progress,error,complete);
+            function progress(snapShot)
+            {
+                var perc=(snapShot.bytesTransferred/snapShot.totalBytes)*100;
+                uploader.value=perc;
+            }
+            function error(err)
+            {
+            }
+            function complete()
+            {
+            }
+        });
+    </script> -->
+    <script src="js/connection.js"></script>
+    <script src="js/uploader.js"></script>
+</body>
+</html>
